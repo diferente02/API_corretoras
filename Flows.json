@@ -1,0 +1,144 @@
+[
+    {
+        "id": "635883423878dad7",
+        "type": "tab",
+        "label": "brazil api corretoras ",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4e8212f1bbb9fe9c",
+        "type": "http request",
+        "z": "635883423878dad7",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://brasilapi.com.br/api/cvm/corretoras/v1",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 400,
+        "y": 80,
+        "wires": [
+            [
+                "f219df356ef631dc"
+            ]
+        ]
+    },
+    {
+        "id": "f219df356ef631dc",
+        "type": "function",
+        "z": "635883423878dad7",
+        "name": "function 1",
+        "func": "let corretoras = msg.payload;\ncorretoras = JSON.parse(corretoras);\n\n// Extraindo apenas o nome social, municipio e o cnpj de cada corretora\nlet listaFormatada = corretoras.map(c => {\n   return `${c.nome_social}  -  ${c.municipio}  /  ${c.cnpj}`;\n});\n\n// Formatando a mensagem como lista \nlet htmlLista = \"<ul>\";\nlistaFormatada.forEach(item =>{\n   htmlLista += `<li>${item}</li>`;\n});\nhtmlLista += \"</ul>\";\n\nmsg.payload = htmlLista;\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 80,
+        "wires": [
+            [
+                "da1abcfa4f418a6b"
+            ]
+        ]
+    },
+    {
+        "id": "c05eaaf9a5fbc93b",
+        "type": "http in",
+        "z": "635883423878dad7",
+        "name": "",
+        "url": "/Corretoras",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 80,
+        "wires": [
+            [
+                "4e8212f1bbb9fe9c"
+            ]
+        ]
+    },
+    {
+        "id": "da1abcfa4f418a6b",
+        "type": "template",
+        "z": "635883423878dad7",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n  <head>\n    <title>Catalogo de corretoras</title>\n    <style>\n      body {font-family:Arial, sans-serif; padding:20px; background-color:#f2f2f2;}\n      h1 {color: #007acc;}\n      ul { list-style-type:none; padding:0;}\n      li {margin: 5px 50px; padding: 5px; background-color:white; border-radius:4px;}\n    </style>\n  </head>\n  <body>\n    <h1>Lista de corretoras</h1>\n    <p>{{{payload}}}</p> {{!-- 3 chaves para renderizar HTML vindo do payload --}}\n  </body>\n</html>",
+        "output": "str",
+        "x": 820,
+        "y": 140,
+        "wires": [
+            [
+                "bb0d9f65c3957727"
+            ]
+        ]
+    },
+    {
+        "id": "d07d0ee509ecc03a",
+        "type": "inject",
+        "z": "635883423878dad7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bb0d9f65c3957727",
+        "type": "http response",
+        "z": "635883423878dad7",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 950,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "05d332fdb5a825ac",
+        "type": "debug",
+        "z": "635883423878dad7",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 60,
+        "wires": []
+    }
+]
