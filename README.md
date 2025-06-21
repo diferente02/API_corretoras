@@ -1,11 +1,7 @@
 # Broker-Catalog
 O projeto consiste de uma API que faz uma requsição a página: https://brasilapi.com.br/api/cvm/corretoras/v1
 
-extrai os dados: 
-
-nome_social  -  municipio  /  cnpj
-
-e retorna:
+extrai os dados: nome_social  -  municipio  /  cnpj e os exibe em uma página html 
 
 <img src="images/template html api.png" alt="site gerado pela API">
 
@@ -48,9 +44,9 @@ http://127.0.0.1:1880/
 
 ### Importação do fluxo
  
-<img src="images/importacao_Tres_barrinhas.png" alt="Tutorial de como importar o fluxo, imagem 1">
-<img src="images/importacao.png" alt="Tutorial de como importar o fluxo, imagem 2">
-<img src="images/importacao_Arquivo.png" alt="Tutorial de como importar o fluxo, imagem 3">
+<img src="images/Importacao_Tres_barrinhas.png" alt="Tutorial de como importar o fluxo, imagem 1">
+<img src="images/Importacao.png" alt="Tutorial de como importar o fluxo, imagem 2">
+<img src="images/Importacao_Arquivo.png" alt="Tutorial de como importar o fluxo, imagem 3">
 
 ## Código
 O Fluxo é dividido em 5 nós:
@@ -67,7 +63,7 @@ Realiza a requisição HTTP no link: https://brasilapi.com.br/api/cvm/corretoras
 
 
 ### FUNCTION
-Processa o payload recebido do request returnando a mensagem já em formato de lista HTML
+Processa o payload recebido do request retornando a mensagem já em formato de lista HTML
 
 ```Javascript
 let corretoras = msg.payload;
