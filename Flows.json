@@ -1,6 +1,6 @@
 [
     {
-        "id": "635883423878dad7",
+        "id": "acf12ff808b40a38",
         "type": "tab",
         "label": "brazil api corretoras ",
         "disabled": false,
@@ -8,9 +8,9 @@
         "env": []
     },
     {
-        "id": "4e8212f1bbb9fe9c",
+        "id": "48baac630d851ba5",
         "type": "http request",
-        "z": "635883423878dad7",
+        "z": "acf12ff808b40a38",
         "name": "",
         "method": "GET",
         "ret": "txt",
@@ -23,38 +23,38 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 400,
-        "y": 80,
+        "x": 320,
+        "y": 140,
         "wires": [
             [
-                "f219df356ef631dc"
+                "4ea07a99cff7f468"
             ]
         ]
     },
     {
-        "id": "f219df356ef631dc",
+        "id": "4ea07a99cff7f468",
         "type": "function",
-        "z": "635883423878dad7",
+        "z": "acf12ff808b40a38",
         "name": "function 1",
-        "func": "let corretoras = msg.payload;\ncorretoras = JSON.parse(corretoras);\n\n// Extraindo apenas o nome social, municipio e o cnpj de cada corretora\nlet listaFormatada = corretoras.map(c => {\n   return `${c.nome_social}  -  ${c.municipio}  /  ${c.cnpj}`;\n});\n\n// Formatando a mensagem como lista \nlet htmlLista = \"<ul>\";\nlistaFormatada.forEach(item =>{\n   htmlLista += `<li>${item}</li>`;\n});\nhtmlLista += \"</ul>\";\n\nmsg.payload = htmlLista;\nreturn msg;\n\n",
+        "func": "let corretoras = msg.payload;\ncorretoras = JSON.parse(corretoras);\n\n// Extraindo apenas o nome social, municipio e o cnpj de cada corretora\nlet listaFormatada = corretoras.map(item => {\n   return `${item.nome_social}  -  ${item.municipio}  /  ${item.cnpj}`;\n});\n\n// Formatando a mensagem como lista \nlet htmlLista = \"<ul>\";\nlistaFormatada.forEach(item =>{\n   htmlLista += `<li>${item}</li>`;\n});\nhtmlLista += \"</ul>\";\n\nmsg.payload = htmlLista;\nreturn msg;\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 580,
-        "y": 80,
+        "x": 500,
+        "y": 180,
         "wires": [
             [
-                "da1abcfa4f418a6b"
+                "ca33ec4c4ba6287d"
             ]
         ]
     },
     {
-        "id": "c05eaaf9a5fbc93b",
+        "id": "f3b47e6826691336",
         "type": "http in",
-        "z": "635883423878dad7",
+        "z": "acf12ff808b40a38",
         "name": "",
         "url": "/Corretoras",
         "method": "get",
@@ -64,14 +64,14 @@
         "y": 80,
         "wires": [
             [
-                "4e8212f1bbb9fe9c"
+                "48baac630d851ba5"
             ]
         ]
     },
     {
-        "id": "da1abcfa4f418a6b",
+        "id": "ca33ec4c4ba6287d",
         "type": "template",
-        "z": "635883423878dad7",
+        "z": "acf12ff808b40a38",
         "name": "",
         "field": "payload",
         "fieldType": "msg",
@@ -79,66 +79,23 @@
         "syntax": "mustache",
         "template": "<html>\n  <head>\n    <title>Catalogo de corretoras</title>\n    <style>\n      body {font-family:Arial, sans-serif; padding:20px; background-color:#f2f2f2;}\n      h1 {color: #007acc;}\n      ul { list-style-type:none; padding:0;}\n      li {margin: 5px 50px; padding: 5px; background-color:white; border-radius:4px;}\n    </style>\n  </head>\n  <body>\n    <h1>Lista de corretoras</h1>\n    <p>{{{payload}}}</p> {{!-- 3 chaves para renderizar HTML vindo do payload --}}\n  </body>\n</html>",
         "output": "str",
-        "x": 820,
-        "y": 140,
+        "x": 680,
+        "y": 240,
         "wires": [
             [
-                "bb0d9f65c3957727"
+                "193519c7edbd83e7"
             ]
         ]
     },
     {
-        "id": "d07d0ee509ecc03a",
-        "type": "inject",
-        "z": "635883423878dad7",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 140,
-        "y": 480,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "bb0d9f65c3957727",
+        "id": "193519c7edbd83e7",
         "type": "http response",
-        "z": "635883423878dad7",
+        "z": "acf12ff808b40a38",
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 950,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "05d332fdb5a825ac",
-        "type": "debug",
-        "z": "635883423878dad7",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 740,
-        "y": 60,
+        "x": 830,
+        "y": 280,
         "wires": []
     }
 ]

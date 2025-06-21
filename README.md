@@ -44,9 +44,11 @@ http://127.0.0.1:1880/
 
 ### Importação do fluxo
  
-<img src="images/Importacao_Tres_barrinhas.png" alt="Tutorial de como importar o fluxo, imagem 1">
-<img src="images/Importacao.png" alt="Tutorial de como importar o fluxo, imagem 2">
-<img src="images/Importacao_Arquivo.png" alt="Tutorial de como importar o fluxo, imagem 3">
+<div style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+  <img src="images/Importacao_Tres_barrinhas.png" alt="Imagem 1" width="200">
+  <img src="images/Importacao.png" alt="Imagem 2" width="200">
+  <img src="images/Importacao_Arquivo.png" alt="Imagem 3" width="200">
+</div>
 
 ## Código
 O Fluxo é dividido em 5 nós:
